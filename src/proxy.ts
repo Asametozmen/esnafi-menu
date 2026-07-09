@@ -1,10 +1,31 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { locales } from "@/lib/i18n/config";
+import { createMiddlewareClient } from "@/lib/supabase/middleware";
 
 const LOCALE_COOKIE = "NEXT_LOCALE";
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  if (pathname.startsWith("/admin")) {
+    const { supabase, response } = createMiddlewareClient(request);
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (pathname === "/admin/login") {
+      if (user) {
+        return NextResponse.redirect(new URL("/admin", request.url));
+      }
+      return response;
+    }
+
+    if (!user) {
+      return NextResponse.redirect(new URL("/admin/login", request.url));
+    }
+    return response;
+  }
+
   const firstSegment = pathname.split("/")[1];
 
   if ((locales as readonly string[]).includes(firstSegment)) {
