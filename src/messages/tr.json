@@ -1,1 +1,11 @@
-{}
+{
+  "menu": {
+    "categoriesTitle": "Kategoriler",
+    "back": "Geri",
+    "emptyCategory": "Bu kategoride henüz ürün yok.",
+    "outOfStock": "Tükendi"
+  },
+  "languageSwitcher": {
+    "label": "Dil"
+  }
+}

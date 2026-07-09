@@ -1,1 +1,11 @@
-{}
+{
+  "menu": {
+    "categoriesTitle": "الأصناف",
+    "back": "رجوع",
+    "emptyCategory": "لا توجد منتجات في هذا الصنف بعد.",
+    "outOfStock": "غير متوفر"
+  },
+  "languageSwitcher": {
+    "label": "اللغة"
+  }
+}

@@ -37,6 +37,7 @@ export type Database = {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [];
       };
       restaurant_settings: {
         Row: {
@@ -111,6 +112,7 @@ export type Database = {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [];
       };
       admin_profiles: {
         Row: {
@@ -134,6 +136,7 @@ export type Database = {
           full_name?: string | null;
           created_at?: string;
         };
+        Relationships: [];
       };
       categories: {
         Row: {
@@ -169,6 +172,7 @@ export type Database = {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [];
       };
       products: {
         Row: {
@@ -177,7 +181,8 @@ export type Database = {
           category_id: string;
           name: Json;
           description: Json | null;
-          price: number;
+          // Postgres numeric(10,2) is serialized as a string over PostgREST.
+          price: string;
           image_path: string | null;
           display_order: number;
           is_active: boolean;
@@ -213,6 +218,7 @@ export type Database = {
           created_at?: string;
           updated_at?: string;
         };
+        Relationships: [];
       };
     };
     Views: Record<string, never>;

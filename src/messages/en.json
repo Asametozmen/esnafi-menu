@@ -1,1 +1,11 @@
-{}
+{
+  "menu": {
+    "categoriesTitle": "Categories",
+    "back": "Back",
+    "emptyCategory": "No products in this category yet.",
+    "outOfStock": "Out of Stock"
+  },
+  "languageSwitcher": {
+    "label": "Language"
+  }
+}
