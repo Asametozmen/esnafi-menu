@@ -14,25 +14,25 @@ export default async function LanguageSelectPage() {
   const restaurant = await getRestaurant();
 
   return (
-    <main className="flex flex-1 flex-col items-center justify-center gap-8 px-6 text-center">
+    <main className="flex flex-1 flex-col items-center justify-center gap-10 bg-white px-6 py-16 text-center">
       {restaurant.settings.logo_path ? (
         <Image
           src={getPublicImageUrl(restaurant.settings.logo_path)}
           alt={restaurant.settings.name}
-          width={220}
-          height={220}
+          width={280}
+          height={280}
           priority
-          className="h-auto w-48"
+          className="h-auto w-56 sm:w-64"
         />
       ) : (
-        <h1 className="text-2xl font-semibold">{restaurant.settings.name}</h1>
+        <h1 className="text-2xl font-semibold text-neutral-900">{restaurant.settings.name}</h1>
       )}
-      <ul className="flex w-full max-w-xs flex-col gap-4">
+      <ul className="flex w-full max-w-xs flex-col gap-3">
         {locales.map((locale) => (
           <li key={locale}>
             <Link
               href={`/${locale}`}
-              className="block w-full rounded-full border border-black/10 px-6 py-3 text-lg font-medium transition-colors hover:bg-black/5 dark:border-white/15 dark:hover:bg-white/10"
+              className="block w-full rounded-full bg-primary px-6 py-3.5 text-lg font-medium text-white shadow-sm transition-transform hover:brightness-110 active:scale-[0.98]"
             >
               {LANGUAGE_LABELS[locale]}
             </Link>

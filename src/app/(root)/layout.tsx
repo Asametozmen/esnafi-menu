@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { getRestaurant } from "@/lib/restaurant";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -17,17 +18,26 @@ export const metadata: Metadata = {
   description: "Esnafi Lokanta dijital menü",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const restaurant = await getRestaurant();
+
   return (
     <html
       lang="tr"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      style={
+        {
+          "--brand-primary": restaurant.settings.theme_primary_color,
+          "--brand-secondary": restaurant.settings.theme_secondary_color,
+          "--brand-accent": restaurant.settings.theme_accent_color,
+        } as React.CSSProperties
+      }
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col bg-white">{children}</body>
     </html>
   );
 }

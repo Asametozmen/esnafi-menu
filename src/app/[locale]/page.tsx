@@ -24,9 +24,9 @@ export default async function CategoriesPage({
   const categories = await getCategories(restaurant.id);
 
   return (
-    <main className="flex-1 pb-8">
+    <main className="flex-1 pb-12">
       {restaurant.settings.cover_image_path && (
-        <div className="relative mb-6 h-40 w-full sm:h-56">
+        <div className="relative h-48 w-full sm:h-64">
           <Image
             src={getPublicImageUrl(restaurant.settings.cover_image_path)}
             alt={restaurant.settings.name}
@@ -34,21 +34,34 @@ export default async function CategoriesPage({
             priority
             className="object-cover"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 px-6 py-4">
+            <p className="text-lg font-semibold text-white drop-shadow-sm sm:text-xl">
+              {restaurant.settings.name}
+            </p>
+          </div>
         </div>
       )}
-      <h1 className="mb-6 px-6 text-2xl font-semibold">{t("categoriesTitle")}</h1>
-      <ul className="grid grid-cols-2 gap-4 px-6 sm:grid-cols-3">
-        {categories.map((category) => (
-          <li key={category.id}>
-            <Link
-              href={`/${locale}/kategori/${category.slug}`}
-              className="block rounded-2xl border border-black/10 px-4 py-6 text-center font-medium transition-colors hover:bg-black/5 dark:border-white/15 dark:hover:bg-white/10"
-            >
-              {localizedText(category.name, locale)}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <div className="px-6 pt-8">
+        <h1 className="mb-6 text-xl font-semibold text-neutral-900 dark:text-neutral-50">
+          {t("categoriesTitle")}
+        </h1>
+        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+          {categories.map((category) => (
+            <li key={category.id}>
+              <Link
+                href={`/${locale}/kategori/${category.slug}`}
+                className="group flex h-24 flex-col justify-end overflow-hidden rounded-2xl border border-black/5 bg-white p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md sm:h-28 dark:border-white/10 dark:bg-neutral-900"
+              >
+                <span className="mb-2 block h-1 w-8 rounded-full bg-primary transition-all group-hover:w-12" />
+                <span className="font-medium text-neutral-900 dark:text-neutral-50">
+                  {localizedText(category.name, locale)}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </main>
   );
 }

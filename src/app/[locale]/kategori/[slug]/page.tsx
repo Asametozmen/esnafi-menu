@@ -32,15 +32,26 @@ export default async function CategoryProductsPage({
     <main className="flex-1 px-6 py-8">
       <Link
         href={`/${locale}`}
-        className="mb-6 inline-block text-sm font-medium underline"
+        className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary"
       >
+        <svg
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          className="h-4 w-4 rtl:rotate-180"
+        >
+          <path
+            fillRule="evenodd"
+            d="M17 10a.75.75 0 0 1-.75.75H5.66l4.1 3.95a.75.75 0 1 1-1.04 1.08l-5.5-5.25a.75.75 0 0 1 0-1.08l5.5-5.25a.75.75 0 1 1 1.04 1.08l-4.1 3.95h10.59A.75.75 0 0 1 17 10Z"
+            clipRule="evenodd"
+          />
+        </svg>
         {t("back")}
       </Link>
-      <h1 className="mb-6 text-2xl font-semibold">
+      <h1 className="mb-6 text-xl font-semibold text-neutral-900 dark:text-neutral-50">
         {localizedText(category.name, locale)}
       </h1>
       {products.length === 0 ? (
-        <p className="text-black/60 dark:text-white/60">{t("emptyCategory")}</p>
+        <p className="text-neutral-500 dark:text-neutral-400">{t("emptyCategory")}</p>
       ) : (
         <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {products.map((product) => (
