@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getCurrentAdmin } from "@/lib/auth";
 import { signOut } from "./actions";
@@ -21,6 +22,14 @@ export default async function AdminDashboardPage() {
       <p className="text-black/60 dark:text-white/60">
         Hoş geldin, {admin.profile.full_name ?? admin.user.email}.
       </p>
+      <nav className="flex gap-4">
+        <Link
+          href="/admin/categories"
+          className="rounded-full border border-black/10 px-4 py-2 text-sm font-medium dark:border-white/15"
+        >
+          Kategoriler
+        </Link>
+      </nav>
     </main>
   );
 }

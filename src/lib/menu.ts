@@ -12,6 +12,18 @@ export async function getCategories(restaurantId: string) {
   return data;
 }
 
+/** Admin views need inactive/draft rows too, unlike the public menu. */
+export async function getAllCategoriesForAdmin(restaurantId: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("categories")
+    .select("*")
+    .eq("restaurant_id", restaurantId)
+    .order("display_order");
+  if (error) throw error;
+  return data;
+}
+
 export async function getCategoryBySlug(restaurantId: string, slug: string) {
   const supabase = await createClient();
   const { data, error } = await supabase
@@ -20,6 +32,18 @@ export async function getCategoryBySlug(restaurantId: string, slug: string) {
     .eq("restaurant_id", restaurantId)
     .eq("slug", slug)
     .eq("is_active", true)
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
+
+export async function getCategoryById(restaurantId: string, id: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("categories")
+    .select("*")
+    .eq("restaurant_id", restaurantId)
+    .eq("id", id)
     .maybeSingle();
   if (error) throw error;
   return data;
