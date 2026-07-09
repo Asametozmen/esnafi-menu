@@ -60,3 +60,27 @@ export async function getProductsByCategory(categoryId: string) {
   if (error) throw error;
   return data;
 }
+
+/** Admin views need inactive/draft rows too, unlike the public menu. */
+export async function getAllProductsForAdmin(restaurantId: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("products")
+    .select("*")
+    .eq("restaurant_id", restaurantId)
+    .order("display_order");
+  if (error) throw error;
+  return data;
+}
+
+export async function getProductById(restaurantId: string, id: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("products")
+    .select("*")
+    .eq("restaurant_id", restaurantId)
+    .eq("id", id)
+    .maybeSingle();
+  if (error) throw error;
+  return data;
+}
