@@ -7,7 +7,7 @@ import { locales, type Locale } from "@/lib/i18n/config";
 const LANGUAGE_LABELS: Record<Locale, string> = {
   tr: "TR",
   en: "EN",
-  ar: "AR",
+  ar: "عربي",
 };
 
 export function LanguageSwitcher({
