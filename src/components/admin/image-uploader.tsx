@@ -6,9 +6,11 @@ import { createClient } from "@/lib/supabase/client";
 import { getPublicImageUrl } from "@/lib/supabase/storage";
 
 export function ImageUploader({
+  name = "image_path",
   objectPathPrefix,
   initialPath,
 }: {
+  name?: string;
   objectPathPrefix: string;
   initialPath?: string | null;
 }) {
@@ -42,7 +44,7 @@ export function ImageUploader({
 
   return (
     <div className="flex flex-col gap-2">
-      <input type="hidden" name="image_path" value={path} />
+      <input type="hidden" name={name} value={path} />
       {path && (
         <Image
           src={getPublicImageUrl(path)}
