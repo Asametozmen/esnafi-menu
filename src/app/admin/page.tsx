@@ -41,6 +41,12 @@ export default async function AdminDashboardPage() {
         >
           Ayarlar
         </Link>
+        <Link
+          href="/admin/qr"
+          className="rounded-full border border-black/10 px-4 py-2 text-sm font-medium dark:border-white/15"
+        >
+          QR Kodu
+        </Link>
       </nav>
     </main>
   );
