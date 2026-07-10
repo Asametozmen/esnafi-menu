@@ -35,7 +35,7 @@ export default async function CategoriesPage({
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/85 via-black/15 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/60 to-transparent sm:h-28" />
           <div className="absolute inset-x-0 bottom-0 px-6 py-4">
             <p className="text-lg font-semibold text-white drop-shadow-sm sm:text-xl">
               {restaurant.settings.name}

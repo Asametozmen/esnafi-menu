@@ -30,10 +30,15 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Layered under Tailwind's base so a page's own bg-* utility (e.g.
+   bg-canvas, bg-white) always wins instead of this fallback — unlayered
+   CSS otherwise beats @layer utilities regardless of specificity. */
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: Arial, Helvetica, sans-serif;
+  }
 }
 
 /* Brand-colored ambient glow for the language-select entry screen. */
