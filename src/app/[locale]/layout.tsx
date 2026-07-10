@@ -86,7 +86,7 @@ export default async function LocaleLayout({
             {restaurant.settings.logo_path ? (
               <Image
                 src={getPublicImageUrl(restaurant.settings.logo_path)}
-                alt={restaurant.settings.name}
+                alt=""
                 width={40}
                 height={40}
                 className="h-9 w-9 object-contain"

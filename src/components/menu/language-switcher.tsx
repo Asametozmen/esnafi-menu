@@ -26,7 +26,8 @@ export function LanguageSwitcher({
           return (
             <span
               key={target}
-              className="rounded-full bg-primary px-3 py-1 text-white"
+              aria-current="true"
+              className="rounded-full bg-primary px-3.5 py-2.5 text-white"
             >
               {LANGUAGE_LABELS[target]}
             </span>
@@ -40,7 +41,7 @@ export function LanguageSwitcher({
           <Link
             key={target}
             href={segments.join("/") || "/"}
-            className="rounded-full px-3 py-1 text-neutral-500 transition-colors hover:bg-black/5 dark:text-neutral-400 dark:hover:bg-white/10"
+            className="rounded-full px-3.5 py-2.5 text-neutral-500 transition-colors hover:bg-black/5 dark:text-neutral-400 dark:hover:bg-white/10"
           >
             {LANGUAGE_LABELS[target]}
           </Link>

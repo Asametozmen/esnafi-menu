@@ -29,7 +29,7 @@ export default async function CategoriesPage({
         <div className="relative h-48 w-full sm:h-64">
           <Image
             src={getPublicImageUrl(restaurant.settings.cover_image_path)}
-            alt={restaurant.settings.name}
+            alt=""
             fill
             priority
             className="object-cover"

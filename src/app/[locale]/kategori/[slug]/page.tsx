@@ -32,11 +32,12 @@ export default async function CategoryProductsPage({
     <main className="flex-1 px-6 py-8">
       <Link
         href={`/${locale}`}
-        className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary"
+        className="-ml-2 mb-4 inline-flex items-center gap-1.5 rounded-lg px-2 py-2 text-sm font-medium text-primary"
       >
         <svg
           viewBox="0 0 20 20"
           fill="currentColor"
+          aria-hidden="true"
           className="h-4 w-4 rtl:rotate-180"
         >
           <path
