@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { getRestaurant } from "@/lib/restaurant";
+import { getPublicImageUrl } from "@/lib/supabase/storage";
+import { defaultLocale, type Locale } from "@/lib/i18n/config";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -13,10 +15,26 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Esnafi Lokanta",
-  description: "Esnafi Lokanta dijital menü",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const restaurant = await getRestaurant();
+  const seoTitle = (restaurant.settings.seo_title as Partial<Record<Locale, string>> | null) ?? {};
+  const seoDescription =
+    (restaurant.settings.seo_description as Partial<Record<Locale, string>> | null) ?? {};
+  const title = seoTitle[defaultLocale] || restaurant.settings.name;
+  const description = seoDescription[defaultLocale] || undefined;
+  const ogImage = restaurant.settings.seo_og_image_path
+    ? getPublicImageUrl(restaurant.settings.seo_og_image_path)
+    : undefined;
+
+  return {
+    title,
+    description,
+    openGraph: { title, description, images: ogImage ? [ogImage] : undefined },
+    icons: restaurant.settings.favicon_path
+      ? { icon: getPublicImageUrl(restaurant.settings.favicon_path) }
+      : undefined,
+  };
+}
 
 export default async function RootLayout({
   children,

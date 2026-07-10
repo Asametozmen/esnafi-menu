@@ -4,7 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { Geist, Geist_Mono } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import { locales, isRtl, isLocale } from "@/lib/i18n/config";
+import { locales, isRtl, isLocale, type Locale } from "@/lib/i18n/config";
 import { LanguageSwitcher } from "@/components/menu/language-switcher";
 import { getRestaurant } from "@/lib/restaurant";
 import { getPublicImageUrl } from "@/lib/supabase/storage";
@@ -20,13 +20,36 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Esnafi Lokanta",
-  description: "Esnafi Lokanta dijital menü",
-};
-
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+
+  const restaurant = await getRestaurant();
+  const seoTitle = (restaurant.settings.seo_title as Partial<Record<Locale, string>> | null) ?? {};
+  const seoDescription =
+    (restaurant.settings.seo_description as Partial<Record<Locale, string>> | null) ?? {};
+  const title = seoTitle[locale] || restaurant.settings.name;
+  const description = seoDescription[locale] || undefined;
+  const ogImage = restaurant.settings.seo_og_image_path
+    ? getPublicImageUrl(restaurant.settings.seo_og_image_path)
+    : undefined;
+
+  return {
+    title,
+    description,
+    openGraph: { title, description, images: ogImage ? [ogImage] : undefined },
+    icons: restaurant.settings.favicon_path
+      ? { icon: getPublicImageUrl(restaurant.settings.favicon_path) }
+      : undefined,
+  };
 }
 
 export default async function LocaleLayout({
