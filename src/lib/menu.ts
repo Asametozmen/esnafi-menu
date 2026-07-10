@@ -1,7 +1,9 @@
 import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 
+/** Public menu read — cookie-free so the calling route can stay static/ISR. */
 export async function getCategories(restaurantId: string) {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const { data, error } = await supabase
     .from("categories")
     .select("*")
@@ -24,8 +26,9 @@ export async function getAllCategoriesForAdmin(restaurantId: string) {
   return data;
 }
 
+/** Public menu read — cookie-free so the calling route can stay static/ISR. */
 export async function getCategoryBySlug(restaurantId: string, slug: string) {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const { data, error } = await supabase
     .from("categories")
     .select("*")
@@ -49,8 +52,9 @@ export async function getCategoryById(restaurantId: string, id: string) {
   return data;
 }
 
+/** Public menu read — cookie-free so the calling route can stay static/ISR. */
 export async function getProductsByCategory(categoryId: string) {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const { data, error } = await supabase
     .from("products")
     .select("*")

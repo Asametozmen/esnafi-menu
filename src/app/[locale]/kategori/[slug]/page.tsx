@@ -2,12 +2,27 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { getRestaurant } from "@/lib/restaurant";
-import { getCategoryBySlug, getProductsByCategory } from "@/lib/menu";
+import { getCategories, getCategoryBySlug, getProductsByCategory } from "@/lib/menu";
 import { localizedText } from "@/lib/i18n/localized-content";
 import { ProductCard } from "@/components/menu/product-card";
-import { isLocale } from "@/lib/i18n/config";
+import { locales, isLocale } from "@/lib/i18n/config";
 
 export const revalidate = 3600;
+
+/**
+ * Without this, the [slug] segment has no static-generation set to join, so
+ * `revalidate` above is silently ignored and every request falls back to
+ * fully dynamic rendering. Prerendering the real slugs at build time (with
+ * dynamicParams left at its default true) means new categories still render
+ * on first hit and get cached from there.
+ */
+export async function generateStaticParams() {
+  const restaurant = await getRestaurant();
+  const categories = await getCategories(restaurant.id);
+  return locales.flatMap((locale) =>
+    categories.map((category) => ({ locale, slug: category.slug })),
+  );
+}
 
 export default async function CategoryProductsPage({
   params,
