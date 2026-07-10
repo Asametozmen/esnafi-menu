@@ -41,7 +41,7 @@ export function LanguageSwitcher({
           <Link
             key={target}
             href={segments.join("/") || "/"}
-            className="rounded-full px-3.5 py-2.5 text-neutral-500 transition-colors hover:bg-black/5 dark:text-neutral-400 dark:hover:bg-white/10"
+            className="rounded-full px-3.5 py-2.5 text-neutral-500 transition-colors hover:bg-primary/10 hover:text-primary"
           >
             {LANGUAGE_LABELS[target]}
           </Link>

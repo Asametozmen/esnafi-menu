@@ -80,8 +80,8 @@ export default async function LocaleLayout({
         } as React.CSSProperties
       }
     >
-      <body className="flex min-h-full flex-col bg-neutral-50 dark:bg-neutral-950">
-        <header className="sticky top-0 z-10 flex items-center justify-between border-b border-black/5 bg-white/90 px-4 py-3 backdrop-blur-sm sm:px-6 dark:border-white/10 dark:bg-neutral-950/90">
+      <body className="flex min-h-full flex-col bg-canvas">
+        <header className="relative sticky top-0 z-10 flex items-center justify-between border-b border-primary/10 bg-white/95 px-4 py-3 backdrop-blur-sm sm:px-6">
           <Link href={`/${locale}`} className="flex items-center gap-2">
             {restaurant.settings.logo_path ? (
               <Image
@@ -92,11 +92,15 @@ export default async function LocaleLayout({
                 className="h-9 w-9 object-contain"
               />
             ) : null}
-            <span className="text-sm font-semibold tracking-tight text-neutral-900 dark:text-neutral-50">
+            <span className="text-sm font-semibold tracking-tight text-neutral-900">
               {restaurant.settings.name}
             </span>
           </Link>
           <LanguageSwitcher locale={locale} label={t("label")} />
+          <span
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 h-[3px] bg-gradient-to-r from-primary via-secondary to-primary"
+          />
         </header>
         {children}
       </body>

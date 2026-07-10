@@ -63,11 +63,11 @@ export default async function CategoryProductsPage({
         </svg>
         {t("back")}
       </Link>
-      <h1 className="mb-6 text-xl font-semibold text-neutral-900 dark:text-neutral-50">
+      <h1 className="mb-6 text-xl font-semibold text-neutral-900">
         {localizedText(category.name, locale)}
       </h1>
       {products.length === 0 ? (
-        <p className="text-neutral-500 dark:text-neutral-400">{t("emptyCategory")}</p>
+        <p className="text-neutral-500">{t("emptyCategory")}</p>
       ) : (
         <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {products.map((product) => (
