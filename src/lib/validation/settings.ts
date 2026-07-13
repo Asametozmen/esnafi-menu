@@ -30,9 +30,11 @@ export const settingsFormSchema = z.object({
   seo_title_tr: z.string().trim().optional(),
   seo_title_en: z.string().trim().optional(),
   seo_title_ar: z.string().trim().optional(),
+  seo_title_ru: z.string().trim().optional(),
   seo_description_tr: z.string().trim().optional(),
   seo_description_en: z.string().trim().optional(),
   seo_description_ar: z.string().trim().optional(),
+  seo_description_ru: z.string().trim().optional(),
   seo_og_image_path: z.string().optional(),
   favicon_path: z.string().optional(),
 });

@@ -19,6 +19,7 @@ function parseForm(formData: FormData) {
     name_tr: formData.get("name_tr"),
     name_en: formData.get("name_en"),
     name_ar: formData.get("name_ar"),
+    name_ru: formData.get("name_ru"),
     is_active: formData.get("is_active") === "on",
   });
 }
@@ -45,7 +46,12 @@ export async function createCategory(formData: FormData) {
 
   const { error } = await supabase.from("categories").insert({
     restaurant_id: restaurant.id,
-    name: { tr: values.name_tr, en: values.name_en ?? "", ar: values.name_ar ?? "" },
+    name: {
+      tr: values.name_tr,
+      en: values.name_en ?? "",
+      ar: values.name_ar ?? "",
+      ru: values.name_ru ?? "",
+    },
     is_active: values.is_active,
     display_order: (last?.display_order ?? -1) + 1,
   });
@@ -68,7 +74,12 @@ export async function updateCategory(id: string, formData: FormData) {
   const { error } = await supabase
     .from("categories")
     .update({
-      name: { tr: values.name_tr, en: values.name_en ?? "", ar: values.name_ar ?? "" },
+      name: {
+      tr: values.name_tr,
+      en: values.name_en ?? "",
+      ar: values.name_ar ?? "",
+      ru: values.name_ru ?? "",
+    },
       is_active: values.is_active,
     })
     .eq("id", id)

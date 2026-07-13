@@ -54,6 +54,15 @@ export function CategoryForm({
           className="rounded-lg border border-black/10 px-4 py-2 dark:border-white/15"
         />
       </label>
+      <label className="flex flex-col gap-1">
+        <span className="text-sm font-medium">Rusça isim</span>
+        <input
+          type="text"
+          name="name_ru"
+          defaultValue={name.ru ?? ""}
+          className="rounded-lg border border-black/10 px-4 py-2 dark:border-white/15"
+        />
+      </label>
       <label className="flex items-center gap-2">
         <input type="checkbox" name="is_active" defaultChecked={category?.is_active ?? true} />
         <span className="text-sm font-medium">Aktif (menüde görünsün)</span>

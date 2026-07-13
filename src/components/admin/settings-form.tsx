@@ -144,6 +144,10 @@ export function SettingsForm({
           <input type="text" name="seo_title_ar" defaultValue={seoTitle.ar ?? ""} dir="rtl" className={inputClass} />
         </label>
         <label className="flex flex-col gap-1">
+          <span className="text-sm font-medium">Sayfa başlığı (RU)</span>
+          <input type="text" name="seo_title_ru" defaultValue={seoTitle.ru ?? ""} className={inputClass} />
+        </label>
+        <label className="flex flex-col gap-1">
           <span className="text-sm font-medium">Açıklama (TR)</span>
           <textarea name="seo_description_tr" defaultValue={seoDescription.tr ?? ""} className={inputClass} />
         </label>
@@ -154,6 +158,10 @@ export function SettingsForm({
         <label className="flex flex-col gap-1">
           <span className="text-sm font-medium">Açıklama (AR)</span>
           <textarea name="seo_description_ar" defaultValue={seoDescription.ar ?? ""} dir="rtl" className={inputClass} />
+        </label>
+        <label className="flex flex-col gap-1">
+          <span className="text-sm font-medium">Açıklama (RU)</span>
+          <textarea name="seo_description_ru" defaultValue={seoDescription.ru ?? ""} className={inputClass} />
         </label>
         <div className="flex flex-col gap-1">
           <span className="text-sm font-medium">Open Graph görseli</span>

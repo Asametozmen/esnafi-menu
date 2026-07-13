@@ -8,6 +8,7 @@ const LANGUAGE_LABELS: Record<Locale, string> = {
   tr: "Türkçe",
   en: "English",
   ar: "العربية",
+  ru: "Русский",
 };
 
 export default async function LanguageSelectPage() {

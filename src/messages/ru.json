@@ -1,0 +1,11 @@
+{
+  "menu": {
+    "categoriesTitle": "Категории",
+    "back": "Назад",
+    "emptyCategory": "В этой категории пока нет блюд.",
+    "outOfStock": "Нет в наличии"
+  },
+  "languageSwitcher": {
+    "label": "Язык"
+  }
+}
