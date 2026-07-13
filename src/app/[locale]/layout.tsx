@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { locales, isRtl, isLocale, type Locale } from "@/lib/i18n/config";
 import { LanguageSwitcher } from "@/components/menu/language-switcher";
+import { InstagramButton } from "@/components/menu/instagram-button";
 import { getRestaurant } from "@/lib/restaurant";
 import { getPublicImageUrl } from "@/lib/supabase/storage";
 import "../globals.css";
@@ -103,6 +104,9 @@ export default async function LocaleLayout({
           />
         </header>
         {children}
+        {restaurant.settings.instagram_url && (
+          <InstagramButton url={restaurant.settings.instagram_url} />
+        )}
       </body>
     </html>
   );

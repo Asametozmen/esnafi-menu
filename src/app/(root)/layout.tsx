@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { getRestaurant } from "@/lib/restaurant";
 import { getPublicImageUrl } from "@/lib/supabase/storage";
 import { defaultLocale, type Locale } from "@/lib/i18n/config";
+import { InstagramButton } from "@/components/menu/instagram-button";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -55,7 +56,12 @@ export default async function RootLayout({
         } as React.CSSProperties
       }
     >
-      <body className="flex min-h-full flex-col bg-white">{children}</body>
+      <body className="flex min-h-full flex-col bg-white">
+        {children}
+        {restaurant.settings.instagram_url && (
+          <InstagramButton url={restaurant.settings.instagram_url} />
+        )}
+      </body>
     </html>
   );
 }
