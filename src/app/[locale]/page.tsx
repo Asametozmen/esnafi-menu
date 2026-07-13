@@ -26,21 +26,15 @@ export default async function CategoriesPage({
   return (
     <main className="flex-1 pb-12">
       {restaurant.settings.cover_image_path && (
-        <div className="relative h-48 w-full sm:h-64">
+        <div className="brand-glow flex w-full items-center justify-center px-6 py-10 sm:py-14">
           <Image
             src={getPublicImageUrl(restaurant.settings.cover_image_path)}
-            alt=""
-            fill
+            alt={restaurant.settings.name}
+            width={2780}
+            height={530}
             priority
-            sizes="100vw"
-            className="object-cover"
+            className="h-auto w-full max-w-xs sm:max-w-md"
           />
-          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/60 to-transparent sm:h-28" />
-          <div className="absolute inset-x-0 bottom-0 px-6 py-4">
-            <p className="text-lg font-semibold text-white drop-shadow-sm sm:text-xl">
-              {restaurant.settings.name}
-            </p>
-          </div>
         </div>
       )}
       <div className="px-6 pt-8">
