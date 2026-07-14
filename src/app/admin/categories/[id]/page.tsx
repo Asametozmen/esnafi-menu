@@ -33,6 +33,8 @@ export default async function EditCategoryPage({
       <CategoryForm
         action={updateCategory.bind(null, category.id)}
         category={category}
+        restaurantId={restaurant.id}
+        id={category.id}
         error={error}
       />
     </main>

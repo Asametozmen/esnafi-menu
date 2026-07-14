@@ -46,12 +46,32 @@ export default async function CategoriesPage({
             <li key={category.id}>
               <Link
                 href={`/${locale}/kategori/${category.slug}`}
-                className="group flex h-24 flex-col justify-end overflow-hidden rounded-2xl border border-primary/10 bg-white p-4 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary/10 sm:h-28"
+                className="group relative flex h-24 items-center overflow-hidden rounded-2xl border border-primary/10 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md hover:shadow-primary/10 sm:h-28"
               >
-                <span className="mb-2 block h-1 w-8 rounded-full bg-gradient-to-r from-primary to-secondary transition-all group-hover:w-12" />
-                <span className="font-medium text-neutral-900">
-                  {localizedText(category.name, locale)}
-                </span>
+                {category.image_path && (
+                  <>
+                    <Image
+                      src={getPublicImageUrl(category.image_path)}
+                      alt=""
+                      fill
+                      sizes="(min-width: 640px) 33vw, 50vw"
+                      className="object-cover object-right transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+                    />
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.70) 35%, rgba(255,255,255,.15) 100%)",
+                      }}
+                    />
+                  </>
+                )}
+                <div className="relative flex flex-col gap-2 p-4">
+                  <span className="block h-1 w-8 rounded-full bg-gradient-to-r from-primary to-secondary transition-all group-hover:w-12" />
+                  <span className="font-medium text-neutral-900">
+                    {localizedText(category.name, locale)}
+                  </span>
+                </div>
               </Link>
             </li>
           ))}

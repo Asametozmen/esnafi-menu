@@ -20,11 +20,13 @@ function parseForm(formData: FormData) {
     name_en: formData.get("name_en"),
     name_ar: formData.get("name_ar"),
     name_ru: formData.get("name_ru"),
+    image_path: formData.get("image_path"),
     is_active: formData.get("is_active") === "on",
   });
 }
 
 export async function createCategory(formData: FormData) {
+  const id = String(formData.get("id") ?? "");
   const parsed = parseForm(formData);
   if (!parsed.success) {
     redirect(
@@ -45,6 +47,7 @@ export async function createCategory(formData: FormData) {
     .maybeSingle();
 
   const { error } = await supabase.from("categories").insert({
+    id,
     restaurant_id: restaurant.id,
     name: {
       tr: values.name_tr,
@@ -52,6 +55,7 @@ export async function createCategory(formData: FormData) {
       ar: values.name_ar ?? "",
       ru: values.name_ru ?? "",
     },
+    image_path: values.image_path || null,
     is_active: values.is_active,
     display_order: (last?.display_order ?? -1) + 1,
   });
@@ -71,6 +75,13 @@ export async function updateCategory(id: string, formData: FormData) {
   const restaurant = await getRestaurant();
   const supabase = await createClient();
 
+  const { data: existing } = await supabase
+    .from("categories")
+    .select("image_path")
+    .eq("id", id)
+    .eq("restaurant_id", restaurant.id)
+    .maybeSingle();
+
   const { error } = await supabase
     .from("categories")
     .update({
@@ -80,11 +91,16 @@ export async function updateCategory(id: string, formData: FormData) {
       ar: values.name_ar ?? "",
       ru: values.name_ru ?? "",
     },
+      image_path: values.image_path || null,
       is_active: values.is_active,
     })
     .eq("id", id)
     .eq("restaurant_id", restaurant.id);
   if (error) throw error;
+
+  if (existing?.image_path && existing.image_path !== values.image_path) {
+    await supabase.storage.from("menu-images").remove([existing.image_path]);
+  }
 
   revalidatePublicMenu();
   redirect("/admin/categories");

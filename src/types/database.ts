@@ -145,6 +145,7 @@ export type Database = {
           slug: string;
           name: Json;
           description: Json | null;
+          image_path: string | null;
           display_order: number;
           is_active: boolean;
           created_at: string;
@@ -156,6 +157,7 @@ export type Database = {
           slug?: string;
           name: Json;
           description?: Json | null;
+          image_path?: string | null;
           display_order?: number;
           is_active?: boolean;
           created_at?: string;
@@ -167,6 +169,7 @@ export type Database = {
           slug?: string;
           name?: Json;
           description?: Json | null;
+          image_path?: string | null;
           display_order?: number;
           is_active?: boolean;
           created_at?: string;

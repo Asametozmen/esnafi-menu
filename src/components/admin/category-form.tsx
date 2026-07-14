@@ -1,14 +1,19 @@
 import type { Database } from "@/types/database";
+import { ImageUploader } from "./image-uploader";
 
 type Category = Database["public"]["Tables"]["categories"]["Row"];
 
 export function CategoryForm({
   action,
   category,
+  restaurantId,
+  id,
   error,
 }: {
   action: (formData: FormData) => void;
   category?: Category;
+  restaurantId: string;
+  id: string;
   error?: string;
 }) {
   const name = (category?.name ?? {}) as Record<string, string>;
@@ -20,11 +25,19 @@ export function CategoryForm({
           {error}
         </p>
       )}
+      <input type="hidden" name="id" value={id} />
       {category && (
         <p className="text-sm text-black/60 dark:text-white/60">
           Slug: <span className="font-mono">{category.slug}</span>
         </p>
       )}
+      <label className="flex flex-col gap-1">
+        <span className="text-sm font-medium">Arka plan görseli</span>
+        <ImageUploader
+          objectPathPrefix={`${restaurantId}/categories/${id}`}
+          initialPath={category?.image_path}
+        />
+      </label>
       <label className="flex flex-col gap-1">
         <span className="text-sm font-medium">Türkçe isim</span>
         <input
